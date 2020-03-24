@@ -1,0 +1,29 @@
+{
+  "name": "audiator",
+  "version": "1.0.0",
+  "description": "IAT 455 Final Project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "app": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sofiabeehere/audiator.git"
+  },
+  "author": "Sofia Bautista",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sofiabeehere/audiator/issues"
+  },
+  "homepage": "https://github.com/sofiabeehere/audiator#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "musicmatch": "^0.3.2"
+  },
+  "devDependencies": {
+    "lite-server": "^2.5.4"
+  }
+}

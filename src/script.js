@@ -14,7 +14,8 @@ https://github.com/mozdevs/MediaRecorder-examples/blob/gh-pages/record-live-audi
 window.addEventListener("DOMContentLoaded", () => {
     const button = document.getElementById("button");
     const result = document.getElementById("result");
-    const main = document.getElementsByTagName("main")[0];
+    const main = document.getElementById("one");
+    const lyrics = document.getElementById("lyrics");
     var recorder, audio;
 
     let listening = false;
@@ -62,9 +63,9 @@ window.addEventListener("DOMContentLoaded", () => {
             result.innerHTML = "";
             for (const res of event.results) {
                 const text = document.createTextNode(res[0].transcript);
-                const p = document.createElement("p");
+                const p = document.createElement("span");
                 if (res.isFinal) {
-                    p.classList.add("final");
+                    p.id = "lyrics";
                 }
                 p.appendChild(text);
                 result.appendChild(p);
@@ -84,3 +85,38 @@ window.addEventListener("DOMContentLoaded", () => {
         message.setAttribute("aria-hidden", "false");
     }
 });
+
+var observer = new MutationObserver(function (mutations) {
+    try {
+       queryLyrics();
+    } catch (err) {
+        if (err instanceof ReferenceError) {
+            console.log("Finalizing lyrics...")
+        } else {
+            console.log(err);
+        }
+    }
+
+    queryLyrics = () => {
+        if (document.contains(lyrics)) {
+            console.log("Lyrics finalized.");
+            
+            const input = document.createElement("input");
+            input.type = "text";
+            input.id = "lyricsInput";
+            input.name = "lyricsInput";
+            input.value = lyrics.textContent;
+            result.removeChild(lyrics);
+            result.appendChild(input);
+
+            const btn = document.createElement("button");
+            btn.type = 'submit';
+            btn.textContent = "Recognize this";
+            result.appendChild(btn);
+
+            observer.disconnect();
+        }
+    };
+});
+
+observer.observe(document, { attributes: false, childList: true, characterData: false, subtree: true });

@@ -23,7 +23,7 @@ header {
   border-bottom: 1px solid #0d122b;
   margin-bottom: 2em;
 }
-main {
+#one {
   flex-grow: 2;
   justify-content: space-around;
   align-items: center;
@@ -50,11 +50,14 @@ main.speaking {
   animation: bg-pulse 1.5s alternate ease-in-out infinite;
 }
 #result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   color: #666;
   font-style: italic;
   text-align: center;
 }
-#result .final {
+#result #lyrics {
   color: #0d122b;
   font-style: normal;
 }
