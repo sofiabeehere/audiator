@@ -1,4 +1,4 @@
-npm au.vscode/*
+.vscode/*
 node_modules
 .env
 Procfile
