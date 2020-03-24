@@ -31,7 +31,7 @@ app.post('/recognize', function (req, res) {
     res.render("recognize.ejs", {lyricsQuery: lyrics});
 })
 
-app.listen(8888, function () {
+app.listen(process.env.PORT || 8888, function () {
     console.log('Example app listening on port 8888!');
 });
 
