@@ -13,6 +13,10 @@ app.get('/', function (req, res) {
     res.render("index.ejs");
 });
 
+app.get('/new', function (req, res) {
+    res.render("new.ejs");
+});
+
 app.post('/recognize', function (req, res) {
     const lyrics = req.body.lyricsInput;
 

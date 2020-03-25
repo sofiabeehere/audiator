@@ -11,25 +11,24 @@ https://github.com/mozdevs/MediaRecorder-examples/blob/gh-pages/record-live-audi
 
 */
 
-window.addEventListener("DOMContentLoaded", () => {
-    const button = document.getElementById("button");
-    const result = document.getElementById("result");
-    const main = document.getElementById("one");
-    const lyrics = document.getElementById("lyrics");
-    var recorder, audio;
+const button = document.querySelector("#button");
+const result = document.querySelector("#result");
+const main = document.querySelector("#one");
+const lyrics = document.querySelector("#lyrics");
+let recorder, audio;
 
-    let listening = false;
+let listening = false;
 
-    const SpeechRecognition =
-        window.SpeechRecognition || window.webkitSpeechRecognition;
-    
-    if (typeof SpeechRecognition !== "undefined") {
-        const recognition = new SpeechRecognition();
+const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
 
-        // get audio stream from user's mic
-        navigator.mediaDevices.getUserMedia({
-            audio: true
-        })
+if (typeof SpeechRecognition !== "undefined") {
+    const recognition = new SpeechRecognition();
+
+    // get audio stream from user's mic
+    navigator.mediaDevices.getUserMedia({
+        audio: true
+    })
         .then(function (stream) {
             recorder = new MediaRecorder(stream);
 
@@ -38,57 +37,57 @@ window.addEventListener("DOMContentLoaded", () => {
             recorder.addEventListener('dataavailable', onRecordingReady);
         });
 
-        const onRecordingReady = (e) => {
-            audio = document.getElementById('audio');
-            // e.data contains a blob representing the recording
-            audio.src = URL.createObjectURL(e.data);
-            // audio.play();
-        };
+    const onRecordingReady = (e) => {
+        audio = document.getElementById('audio');
+        // e.data contains a blob representing the recording
+        audio.src = URL.createObjectURL(e.data);
+        console.log(audio.src);
+        // audio.play();
+    };
 
-        const stop = () => {
-            main.classList.remove("speaking");
-            recorder.stop();
-            recognition.stop();
-            button.textContent = "Start listening";
-        };
+    const stop = () => {
+        main.classList.remove("speaking");
+        recorder.stop();
+        recognition.stop();
+        button.textContent = "Start listening";
+    };
 
-        const start = () => {
-            main.classList.add("speaking");
-            recorder.start();
-            recognition.start();
-            button.textContent = "Stop listening";
-        };
+    const start = () => {
+        main.classList.add("speaking");
+        recorder.start();
+        recognition.start();
+        button.textContent = "Stop listening";
+    };
 
-        const onResult = event => {
-            result.innerHTML = "";
-            for (const res of event.results) {
-                const text = document.createTextNode(res[0].transcript);
-                const p = document.createElement("span");
-                if (res.isFinal) {
-                    p.id = "lyrics";
-                }
-                p.appendChild(text);
-                result.appendChild(p);
+    const onResult = event => {
+        result.innerHTML = "";
+        for (const res of event.results) {
+            const sp = document.createElement("span");
+            if (res.isFinal) {
+                sp.id = "lyrics";
             }
-        };
-        recognition.continuous = true;
-        recognition.interimResults = true;
-        recognition.addEventListener("result", onResult);
-        button.addEventListener("click", event => {
-            listening ? stop() : start();
-            listening = !listening;
-        });
-    } else {
-        button.remove();
-        const message = document.getElementById("message");
-        message.removeAttribute("hidden");
-        message.setAttribute("aria-hidden", "false");
-    }
-});
+            sp.textContent = res[0].transcript
+            result.appendChild(sp);
+        }
+    };
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.addEventListener("result", onResult);
+    button.addEventListener("click", event => {
+        listening ? stop() : start();
+        listening = !listening;
+    });
+} else {
+    button.remove();
+    const message = document.getElementById("message");
+    message.removeAttribute("hidden");
+    message.setAttribute("aria-hidden", "false");
+}
+
 
 var observer = new MutationObserver(function (mutations) {
     try {
-       queryLyrics();
+        queryLyrics();
     } catch (err) {
         if (err instanceof ReferenceError) {
             console.log("Finalizing lyrics...")
@@ -100,7 +99,7 @@ var observer = new MutationObserver(function (mutations) {
     queryLyrics = () => {
         if (document.contains(lyrics)) {
             console.log("Lyrics finalized.");
-            
+
             const input = document.createElement("input");
             input.type = "text";
             input.id = "lyricsInput";
