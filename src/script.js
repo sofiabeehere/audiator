@@ -12,10 +12,10 @@ https://github.com/mozdevs/MediaRecorder-examples/blob/gh-pages/record-live-audi
 */
 
 window.addEventListener("DOMContentLoaded", () => {
-    const button = document.getElementById("button");
-    const result = document.getElementById("result");
-    const main = document.getElementById("one");
-    const lyrics = document.getElementById("lyrics");
+    const button = document.querySelector("button");
+    const result = document.querySelector("#result");
+    const main = document.querySelector("#one");
+    const lyrics = document.querySelector("#lyrics");
     var recorder, audio;
 
     let listening = false;
@@ -39,7 +39,7 @@ window.addEventListener("DOMContentLoaded", () => {
         });
 
         const onRecordingReady = (e) => {
-            audio = document.getElementById('audio');
+            audio = document.querySelector('#audio');
             // e.data contains a blob representing the recording
             audio.src = URL.createObjectURL(e.data);
             // audio.play();
@@ -80,7 +80,7 @@ window.addEventListener("DOMContentLoaded", () => {
         });
     } else {
         button.remove();
-        const message = document.getElementById("message");
+        const message = document.querySelector("#message");
         message.removeAttribute("hidden");
         message.setAttribute("aria-hidden", "false");
     }

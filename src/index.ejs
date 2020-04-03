@@ -14,18 +14,21 @@
         <h1>Welcome to Audiator</h1>
     </header>
     <section id="one">
-        <button id="button">Start listening</button>
-        <p><audio id="audio" controls></audio></p>
-        <form id="result" action="/recognize" method="POST"></div>
-        <p id="message" hidden aria-hidden="true">
+        <!-- <button id="button">Start listening</button>
+        <p><audio id="audio" controls></audio></p> -->
+        <form id="result" action="/recognize" method="POST">
+        <!-- <p id="message" hidden aria-hidden="true">
             Your browser doesn't support Speech Recognition. Sorry.
-        </p>
+        </p> -->
+            <input type="url" id="youtubeURL" name="youtubeURL" placeholder="Enter a YouTube URL..."></input>
+            <button id="button">Audiate</button>
+        </form>
     </section>
     <section id="two">
         
     </section>
 
-    <script src="script.js"></script>
+    <script src="new.js"></script>
 </body>
 
 </html>
