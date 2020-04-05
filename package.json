@@ -22,8 +22,10 @@
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
+    "genius-lyrics": "^1.0.9",
     "musicmatch": "^0.3.2",
-    "youtube-audio-stream": "^0.3.5"
+    "youtube-audio-stream": "^0.3.5",
+    "youtube-info": "^1.3.2"
   },
   "devDependencies": {
     "lite-server": "^2.5.4"
