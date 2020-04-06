@@ -1,5 +1,5 @@
-#!/usr/bin/env python
-# coding=utf-8
+import sys
+args = sys.argv[1:]
 
 from aeneas.exacttiming import TimeValue
 from aeneas.executetask import ExecuteTask
@@ -12,10 +12,6 @@ from aeneas.adjustboundaryalgorithm import AdjustBoundaryAlgorithm
 from aeneas.runtimeconfiguration import RuntimeConfiguration
 import aeneas.globalconstants as gc
 from aeneas.synthesizer import Synthesizer
-from aeneas.logger import Logger
-
-
-logger = Logger(tee=True)
 
 # create Task object
 config = TaskConfiguration()
@@ -33,11 +29,12 @@ rconf[RuntimeConfiguration.MFCC_MASK_NONSPEECH_L2] = False
 rconf[RuntimeConfiguration.MFCC_MASK_NONSPEECH_L3] = False
 task = Task()
 task.configuration = config
-task.audio_file_path_absolute = u"./test/audio/vocals.wav"
-task.text_file_path_absolute = u"./test/lyrics.txt"
+task.audio_file_path_absolute = args[0]
+task.text_file_path_absolute = args[1]
+task.sync_map_file_path_absolute = args[2]
 
 # process Task
-ExecuteTask(task, rconf=rconf, logger=logger).execute()
+ExecuteTask(task, rconf=rconf).execute()
 
 # print produced sync map
-print(task.sync_map)
+task.output_sync_map_file()
