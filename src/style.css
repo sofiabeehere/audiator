@@ -94,3 +94,9 @@ a {
   color: #f22f46;
   text-align: center;
 }
+
+#subs span {
+    color: #388891;
+    text-transform: capitalize;
+    background-color: yellow;
+}

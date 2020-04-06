@@ -7,6 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Audiator</title>
     <link rel="stylesheet" href="style.css" />
+    <script>
+        window.module = { exports: {} }
+    </script>
+    <script src="https://unpkg.com/audio-sync-with-text@1.0.0/audiosync.js"></script>
 </head>
 
 <body>
@@ -14,10 +18,13 @@
         <h1>Welcome to Audiator</h1>
     </header>
     <section id="three">
-        
+        <audio id="instrumentalFile" controls>
+            <source src="/instrumentals.wav" type="audio/wav">
+        </audio>
+        <div id="lyrics"></div>
     </section>
     
-    <script src="new.js"></script>
+    <script src="bundle.js"></script>
 </body>
     
 </html>
