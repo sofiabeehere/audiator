@@ -96,6 +96,11 @@ button:focus {
 a {
   color: #0d122b;
 }
+
+#karaoke-button {
+  display: none;
+}
+
 .error {
   color: #f22f46;
   text-align: center;
