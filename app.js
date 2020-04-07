@@ -4,6 +4,8 @@ const app = express();
 const dotenv = require('dotenv').config();
 const session = require('express-session');
 const path = require('path')
+var SSE = require('express-sse');
+var sse = new SSE();
 
 // File IO library
 const fs = require('fs')
@@ -161,6 +163,8 @@ app.post('/recognize', function (req, res) {
                 alignedLyricsPath,
             ],
         })
+
+        sse.send("done", "onProcessingComplete");
     })
 });
 
@@ -185,6 +189,8 @@ app.get("/vocals.wav", (req, res) => {
     vocalsStream.pipe(res);
 });
 
+app.get('/stream', sse.init);
+
 // Instantiates /lyrics.vtt as a routable address
 app.get('/lyrics.vtt', (req, res) => {
     res.contentType = 'text/vtt';
@@ -193,7 +199,7 @@ app.get('/lyrics.vtt', (req, res) => {
         if (err) throw err;
         res.send(data.replace(/^\d+\n/gm, ''))
     });
-})
+});
 
 // Instantiates result.ejs under [root URL]/result
 app.get('/result', function (req, res) {
