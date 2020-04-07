@@ -23,8 +23,10 @@ header {
   border-bottom: 1px solid #0d122b;
   margin-bottom: 2em;
 }
-#one {
-  flex-grow: 2;
+
+section {
+  display: flex;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
   background-color: #fff;
@@ -37,6 +39,10 @@ header {
 input {
   padding: 1em;
   width: 30vw;
+  margin-bottom: 3em;
+}
+
+audio {
   margin-bottom: 3em;
 }
 
