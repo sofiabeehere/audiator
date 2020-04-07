@@ -84,7 +84,7 @@ app.post('/recognize', function (req, res) {
         // This stores the clean song title for querying Genius later
         let songTitle;
         // If video metadata exists
-        if (info.media && !){
+        if (info.media && !info.media.artist.match(/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g)){
             // Concatenate song title and artist name (without any commas) and assign to songTitle
             songTitle = info.media.song + ' ' + (info.media.artist).replace(/,/g, '');
         // Else-if artist name contain special characters (Genius API does not accept them for search queries)...
