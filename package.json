@@ -23,6 +23,7 @@
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
+    "express-sse": "^0.5.3",
     "genius-lyrics": "^1.0.9",
     "python-shell": "^1.0.8",
     "youtube-audio-stream": "^0.3.5",
